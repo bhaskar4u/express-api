@@ -57,4 +57,16 @@ module.exports = {
       res.send("something went Wrong" + err);
     }
   },
+  update: async (req, res) => {
+    try {
+      const updateUser = await User.findOneAndUpdate(
+        { _id: req.body.id },
+        req.body,
+        { new: true }
+      );
+      res.status(200).send({ updateUser });
+    } catch (err) {
+      res.status(404).send("user Data not updated", err);
+    }
+  },
 };
